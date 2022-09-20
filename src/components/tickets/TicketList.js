@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { Ticket } from "./Ticket"
 import "./Tickets.css"
 
-export const TicketList = () => {
+export const TicketList = ({ searchTermState }) => {
     const [tickets, setTickets] = useState([])
+    const [employees, setEmployees] = useState([])
     const [filteredTickets, setFiltered] = useState([])
     const [emergency, setEmergency] = useState(false)
     const [openOnly, updateOpenOnly] = useState(false)
@@ -11,6 +13,16 @@ export const TicketList = () => {
 
     const localHoneyUser = localStorage.getItem("honey_user")
     const honeyUserObject = JSON.parse(localHoneyUser)
+
+    useEffect(
+        () => {
+            const searchedTickets = tickets.filter(ticket => {
+                return ticket.description.toLowerCase().startsWith(searchTermState.toLowerCase())
+            })
+            setFiltered(searchedTickets)
+        },
+        [searchTermState]
+    )
     
     useEffect(
         () => {
@@ -25,12 +37,22 @@ export const TicketList = () => {
         [emergency]
     )
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/serviceTickets`)
+    const getAllTickets = () => {
+        fetch(`http://localhost:8088/serviceTickets?_embed=employeeTickets`)
                 .then(response => response.json())
                 .then((ticketArray) => {
                     setTickets(ticketArray)
+                })
+    }
+
+    useEffect(
+        () => {
+            getAllTickets()
+
+            fetch(`http://localhost:8088/employees?_expand=user`)
+                .then(response => response.json())
+                .then((employeeArray) => {
+                    setEmployees(employeeArray)
                 })
         },
         [] // When this array is empty, you are observing initial component state
@@ -67,6 +89,7 @@ export const TicketList = () => {
         [ openOnly ]
     )
 
+
     return <>
         {
             honeyUserObject.staff
@@ -86,12 +109,10 @@ export const TicketList = () => {
         <article className="tickets">
             {
                 filteredTickets.map(
-                    (ticket) => {
-                        return <section className="ticket">
-                            <header>{ticket.description}</header>
-                            <footer>Emergency: {ticket.emergency ? "🧨" : "No"}</footer>
-                        </section>
-                    }
+                    (ticket) => <Ticket employees={employees}
+                    getAllTickets={getAllTickets}
+                    currentUser={honeyUserObject} 
+                    ticketObject={ticket} />
                 )
             }
         </article>

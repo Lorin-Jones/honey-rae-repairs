@@ -1,0 +1,15 @@
+.customers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.customer {
+    background-color: pink;
+    border: 2px dotted fuchsia;
+    padding: 0.5rem;
+    color: black;
+    margin: 0.5rem;
+
+}
