@@ -7,7 +7,7 @@ export const CustomerDetails = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/customers?_expand=user&userId=${customerId}`)
+            fetch(`http://localhost:8000/customers?_expand=user&userId=${customerId}`)
                 .then(response => response.json())
                 .then((data) => {
                     const singleCustomer = data[0]

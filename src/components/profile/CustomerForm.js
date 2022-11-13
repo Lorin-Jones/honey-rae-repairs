@@ -26,7 +26,7 @@ export const CustomerForm = () => {
 
     // TODO: Get employee profile info from API and update state
     useEffect(() => {
-        fetch(`http://localhost:8088/customers?userId=${honeyUserObject.id}`)
+        fetch(`http://localhost:8000/customers?userId=${honeyUserObject.id}`)
            .then(response => response.json())
            .then((data) => {
                const customerObject = data[0]
@@ -34,7 +34,7 @@ export const CustomerForm = () => {
            })
     }, [])
     useEffect(() => {
-        fetch(`http://localhost:8088/users?id=${honeyUserObject.id}`)
+        fetch(`http://localhost:8000/users?id=${honeyUserObject.id}`)
             .then(response => response.json())
             .then((data) => {
                 const userObject = data[0]
@@ -50,7 +50,7 @@ export const CustomerForm = () => {
             TODO: Perform the PUT fetch() call here to update the profile.
             Navigate user to home page when done.
         */
-       return fetch(`http://localhost:8088/users/${user.id}`, {
+       return fetch(`http://localhost:8000/users/${user.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -59,7 +59,7 @@ export const CustomerForm = () => {
        })
            .then(response => response.json())
            .then(() => {
-                return fetch(`http://localhost:8088/customers/${customer.id}`, {
+                return fetch(`http://localhost:8000/customers/${customer.id}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json"

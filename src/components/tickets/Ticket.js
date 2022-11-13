@@ -27,7 +27,7 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
             dateCompleted: new Date()
         }
 
-        return fetch(`http://localhost:8088/serviceTickets/${ticketObject.id}`, {
+        return fetch(`http://localhost:8000/serviceTickets/${ticketObject.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

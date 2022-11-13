@@ -14,7 +14,7 @@ export const TicketEdit = () => {
 
     // TODO: Get the ticket state from the API.
     useEffect(() => {
-        fetch(`http://localhost:8088/serviceTickets/${ticketId}`)
+        fetch(`http://localhost:8000/serviceTickets/${ticketId}`)
             .then(response => response.json())
             .then((data) => {
                 assignTicket(data)
@@ -25,7 +25,7 @@ export const TicketEdit = () => {
         event.preventDefault()
 
         // TODO: Write the fetch for the PUT request to replace the object being edited
-        return fetch(`http://localhost:8088/serviceTickets/${ticket.id}`, {
+        return fetch(`http://localhost:8000/serviceTickets/${ticket.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

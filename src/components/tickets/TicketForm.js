@@ -36,7 +36,7 @@ export const TicketForm = () => {
             dateCompleted: ""
         }
 
-        return fetch(`http://localhost:8088/serviceTickets`, {
+        return fetch(`http://localhost:8000/serviceTickets`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

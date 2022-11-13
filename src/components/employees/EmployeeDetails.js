@@ -7,7 +7,7 @@ export const EmployeeDetails = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/employees?_expand=user&_embed=employeeTickets&userId=${employeeId}`)
+            fetch(`http://localhost:8000/employees?_expand=user&_embed=employeeTickets&userId=${employeeId}`)
                 .then(response => response.json())
                 .then((data) => {
                     const singleEmployee = data[0]

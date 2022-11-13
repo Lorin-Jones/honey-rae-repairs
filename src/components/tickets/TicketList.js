@@ -38,7 +38,7 @@ export const TicketList = ({ searchTermState }) => {
     )
 
     const getAllTickets = () => {
-        fetch(`http://localhost:8088/serviceTickets?_embed=employeeTickets`)
+        fetch(`http://localhost:8000/serviceTickets?_embed=employeeTickets`)
                 .then(response => response.json())
                 .then((ticketArray) => {
                     setTickets(ticketArray)
@@ -49,7 +49,7 @@ export const TicketList = ({ searchTermState }) => {
         () => {
             getAllTickets()
 
-            fetch(`http://localhost:8088/employees?_expand=user`)
+            fetch(`http://localhost:8000/employees?_expand=user`)
                 .then(response => response.json())
                 .then((employeeArray) => {
                     setEmployees(employeeArray)

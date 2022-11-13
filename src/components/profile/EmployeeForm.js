@@ -21,7 +21,7 @@ export const EmployeeForm = () => {
 
     // TODO: Get employee profile info from API and update state
     useEffect(() => {
-        fetch(`http://localhost:8088/employees?userId=${honeyUserObject.id}`)
+        fetch(`http://localhost:8000/employees?userId=${honeyUserObject.id}`)
            .then(response => response.json())
            .then((data) => {
                const employeeObject = data[0]
@@ -37,7 +37,7 @@ export const EmployeeForm = () => {
             TODO: Perform the PUT fetch() call here to update the profile.
             Navigate user to home page when done.
         */
-       return fetch(`http://localhost:8088/employees/${profile.id}`, {
+       return fetch(`http://localhost:8000/employees/${profile.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
